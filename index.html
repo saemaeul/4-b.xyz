@@ -73,16 +73,51 @@
         a:hover {
             text-decoration: underline;
         }
-
-        /* 横屏布局 */
+        .container section {
+            position: relative;
+        }
+        .container section:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background-color: #ddd;
+        }
+        .container section:not(:last-child) {
+            margin-bottom: 2em;
+            padding-bottom: 1em;
+            border-right: none;
+        }
         @media (min-width: 800px) {
             .container {
                 display: flex;
-                gap: 1em;
+                gap: 2em;
+                padding: 2em;
             }
             .container section {
                 flex: 1;
                 margin-top: 0;
+                padding: 1em;
+                background-color: #fafafa;
+                border-radius: 8px;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+                position: relative;
+            }
+            .container section:not(:last-child)::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                right: -1em;
+                width: 1px;
+                background-color: #ddd;
+            }
+            .container section:not(:last-child) {
+                margin-bottom: 0;
+                padding-bottom: 0;
+                border-right: none;
             }
         }
     </style>
@@ -94,25 +129,25 @@
     <div class="info-bar" id="info-bar">加载中...</div>
     <div class="container">
         <section>
-            <h3 class="subject">摆烂</h3>
+            <h3 class="subject">语文</h3>
             <ul>
-                <li>摆烂</li>
-                <li>摆烂</li>
-                <li>摆烂</li>
-                <li>摆烂</li>
+                <li>背诵《春晓》</li>
+                <li>完成课后练习</li>
+                <li>预习第三课生字词</li>
             </ul>
         </section>
         <section>
-            <h3 class="subject">摆烂</h3>
+            <h3 class="subject">数学</h3>
             <ul>
-                <li>摆烂</li>
+                <li>完成练习册P35-38</li>
+                <li>准备明天课堂小测</li>
             </ul>
         </section>
         <section>
-            <h3 class="subject">摆烂</h3>
+            <h3 class="subject">英语</h3>
             <ul>
-                <li>摆烂</li>
-                <li>摆烂</li>
+                <li>背诵单词表Unit 2</li>
+                <li>完成在线听力练习</li>
             </ul>
         </section>
     </div>
