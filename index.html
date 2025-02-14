@@ -9,41 +9,74 @@
             font-family: 'SourceHanSansCN';
             src: url('https://webstatic.mihoyo.com/common/clgm-static/ys/fonts/zh-cn.ttf') format('truetype');
         }
+        :root {
+            --bg-color: #f4f4f4;
+            --text-color: #333;
+            --header-bg: #4CAF50;
+            --header-text: #fff;
+            --info-bar-bg: #e8f5e9;
+            --info-bar-text: #2e7d32;
+            --container-bg: #fff;
+            --container-shadow: rgba(0, 0, 0, 0.1);
+            --subject-border: #ddd;
+            --item-bg: #f8f8f8;
+            --item-border: #4CAF50;
+            --footer-bg: #333;
+            --footer-text: #fff;
+            --link-color: #007bff;
+        }
+        [data-theme="dark"] {
+            --bg-color: #1e1e1e;
+            --text-color: #e0e0e0;
+            --header-bg: #2e7d32;
+            --header-text: #fff;
+            --info-bar-bg: #1b5e20;
+            --info-bar-text: #e0e0e0;
+            --container-bg: #2d2d2d;
+            --container-shadow: rgba(0, 0, 0, 0.3);
+            --subject-border: #444;
+            --item-bg: #3d3d3d;
+            --item-border: #2e7d32;
+            --footer-bg: #1e1e1e;
+            --footer-text: #e0e0e0;
+            --link-color: #64b5f6;
+        }
         body {
             font-family: 'SourceHanSansCN', sans-serif;
             margin: 0;
-            background-color: #f4f4f4;
-            color: #333;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
         }
         header {
-            background-color: #4CAF50;
+            background-color: var(--header-bg);
             text-align: center;
             padding: 1em 0;
         }
         h1 {
             margin: 0;
-            color: #fff;
+            color: var(--header-text);
             font-weight: 300;
             font-size: 2rem;
         }
         .info-bar {
-            background-color: #e8f5e9;
+            background-color: var(--info-bar-bg);
             padding: 0.5em;
             text-align: center;
             font-size: 0.9em;
-            color: #2e7d32;
+            color: var(--info-bar-text);
         }
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 1em;
-            background-color: white;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: var(--container-bg);
+            box-shadow: 0 0 10px var(--container-shadow);
         }
         .subject {
             margin-top: 1em;
             font-size: 1.2em;
-            border-bottom: 1px solid #ddd;
+            border-bottom: 1px solid var(--subject-border);
             padding-bottom: 0.5em;
         }
         ul {
@@ -53,72 +86,37 @@
         li {
             margin: 0.5em 0;
             padding: 0.5em;
-            background-color: #f8f8f8;
-            border-left: 4px solid #4CAF50;
+            background-color: var(--item-bg);
+            border-left: 4px solid var(--item-border);
         }
         footer {
             text-align: center;
             padding: 1em 0;
-            background-color: #333;
-            color: white;
+            background-color: var(--footer-bg);
+            color: var(--footer-text);
             margin-top: 1em;
         }
         footer p {
             margin: 0.2em 0;
         }
         a {
-            color: #007bff;
+            color: var(--link-color);
             text-decoration: none;
         }
         a:hover {
             text-decoration: underline;
         }
-        .container section {
-            position: relative;
-        }
-        .container section:not(:last-child)::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background-color: #ddd;
-        }
-        .container section:not(:last-child) {
-            margin-bottom: 2em;
-            padding-bottom: 1em;
-            border-right: none;
-        }
-        @media (min-width: 800px) {
-            .container {
-                display: flex;
-                gap: 2em;
-                padding: 2em;
-            }
-            .container section {
-                flex: 1;
-                margin-top: 0;
-                padding: 1em;
-                background-color: #fafafa;
-                border-radius: 8px;
-                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-                position: relative;
-            }
-            .container section:not(:last-child)::after {
-                content: '';
-                position: absolute;
-                top: 0;
-                bottom: 0;
-                right: -1em;
-                width: 1px;
-                background-color: #ddd;
-            }
-            .container section:not(:last-child) {
-                margin-bottom: 0;
-                padding-bottom: 0;
-                border-right: none;
-            }
+        .theme-toggle {
+            position: fixed;
+            bottom: 1em;
+            right: 1em;
+            background-color: var(--header-bg);
+            color: var(--header-text);
+            border: none;
+            padding: 0.5em 1em;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
         }
     </style>
 </head>
@@ -154,7 +152,29 @@
         <p>Powered by GitHub Pages</p>
         <p><a href="mailto:4b@4-b.xyz">4b@4-b.xyz</a></p>
     </footer>
+    <button class="theme-toggle" id="theme-toggle">切换暗黑模式</button>
     <script>
+        const themeToggle = document.getElementById('theme-toggle');
+        const savedTheme = localStorage.getItem('theme');
+        const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+
+        const setTheme = (theme) => {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            themeToggle.textContent = theme === 'dark' ? '切换亮色模式' : '切换暗黑模式';
+        };
+
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else {
+            setTheme(systemTheme);
+        }
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+        });
+
         fetch('https://api.github.com/repos/mugunghwa-korea/4-b.xyz')
             .then(response => {
                 if (!response.ok) throw new Error('网络响应错误');
