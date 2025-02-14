@@ -23,6 +23,15 @@
         h1 {
             margin: 0;
             color: #fff;
+            font-weight: 300;
+            font-size: 2rem;
+        }
+        .info-bar {
+            background-color: #e8f5e9;
+            padding: 0.5em;
+            text-align: center;
+            font-size: 0.9em;
+            color: #2e7d32;
         }
         .container {
             max-width: 800px;
@@ -54,12 +63,23 @@
             color: white;
             margin-top: 1em;
         }
+        footer p {
+            margin: 0.2em 0;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
     <header>
         <h1>4B作业网</h1>
     </header>
+    <div class="info-bar" id="info-bar">加载中...</div>
     <div class="container">
         <section>
             <h3 class="subject">摆烂</h3>
@@ -86,6 +106,23 @@
     </div>
     <footer>
         <p>Powered by GitHub Pages</p>
+        <p><a href="mailto:4b@4-b.xyz">4b@4-b.xyz</a></p>
     </footer>
+    <script>
+        fetch('https://api.github.com/repos/mugunghwa-korea/4-b.xyz')
+            .then(response => {
+                if (!response.ok) throw new Error('网络响应错误');
+                return response.json();
+            })
+            .then(data => {
+                const lastUpdated = new Date(data.pushed_at);
+                const formattedDate = `${lastUpdated.getFullYear()}年${lastUpdated.getMonth() + 1}月${lastUpdated.getDate()}日`;
+                document.getElementById('info-bar').innerHTML = `最近更新：${formattedDate}`;
+            })
+            .catch(error => {
+                console.error('获取更新日期失败：', error);
+                document.getElementById('info-bar').innerHTML = '最近更新：加载失败，请稍后重试';
+            });
+    </script>
 </body>
 </html>
