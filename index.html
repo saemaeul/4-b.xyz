@@ -34,7 +34,7 @@
             color: #2e7d32;
         }
         .container {
-            max-width: 800px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 1em;
             background-color: white;
@@ -72,6 +72,18 @@
         }
         a:hover {
             text-decoration: underline;
+        }
+
+        /* 横屏布局 */
+        @media (min-width: 800px) {
+            .container {
+                display: flex;
+                gap: 1em;
+            }
+            .container section {
+                flex: 1;
+                margin-top: 0;
+            }
         }
     </style>
 </head>
