@@ -5,108 +5,146 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>4B作业网</title>
     <style>
+        @font-face {
+            font-family: 'MiSans';
+            src: url('https://webstatic.mihoyo.com/common/clgm-static/sr/fonts/zh-cn.ttf') format('truetype');
+        }
         :root {
-            --bg-color: #000;
+            --bg-gradient: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
             --text-color: #f5f5f7;
-            --header-bg: #1c1c1e;
-            --container-bg: #2d2d2d;
-            --container-border: #48484a;
+            --header-bg: linear-gradient(135deg, #2d2d2d 0%, #1c1c1e 100%);
+            --container-bg: rgba(45, 45, 45, 0.8);
+            --container-border: rgba(72, 72, 74, 0.3);
             --accent-color: #0a84ff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
         [data-theme="light"] {
-            --bg-color: #f5f5f7;
+            --bg-gradient: linear-gradient(135deg, #f5f5f7 0%, #e0e0e0 100%);
             --text-color: #1d1d1f;
-            --header-bg: #ffffff;
-            --container-bg: #ffffff;
-            --container-border: #e0e0e0;
-            --accent-color: #0071e3;
+            --header-bg: linear-gradient(135deg, #ffffff 0%, #f5f5f7 100%);
+            --container-bg: rgba(255, 255, 255, 0.9);
+            --container-border: rgba(224, 224, 224, 0.3);
+            --accent-color: #0071e3);
         }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-            margin:0;
-            background:var(--bg-color);
-            color:var(--text-color);
-            min-height:100vh;
-            display:flex;
-            flex-direction:column;
+            font-family: 'MiSans', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            margin: 0;
+            background: var(--bg-gradient);
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            backdrop-filter: blur(10px);
         }
         header {
-            padding:1.5rem;
-            background:var(--header-bg);
-            position:sticky;
-            top:0;
-            border-bottom:1px solid var(--container-border);
+            padding: 1.5rem;
+            background: var(--header-bg);
+            position: sticky;
+            top: 0;
+            border-bottom: 1px solid var(--container-border);
+            box-shadow: var(--shadow);
         }
         h1 {
-            margin:0;
-            font-size:2rem;
-            text-align:center;
+            margin: 0;
+            font-size: 2rem;
+            text-align: center;
+            letter-spacing: 2px;
+        }
+        .update-time {
+            text-align: center;
+            padding: 1rem;
+            background: var(--container-bg);
+            margin: 1rem auto;
+            width: fit-content;
+            border-radius: 8px;
+            border: 1px solid var(--container-border);
         }
         .container {
-            flex:1;
-            display:grid;
-            grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-            gap:1.5rem;
-            padding:1.5rem;
-            margin:0 auto;
-            width:95%;
-            max-width:1200px;
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            padding: 1.5rem;
+            margin: 0 auto;
+            width: 95%;
+            max-width: 1200px;
         }
         section {
-            background:var(--container-bg);
-            border-radius:12px;
-            padding:1.5rem;
-            border:1px solid var(--container-border);
+            background: var(--container-bg);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid var(--container-border);
+            backdrop-filter: blur(8px);
+            transition: transform 0.3s ease;
+            box-shadow: var(--shadow);
+        }
+        section:hover {
+            transform: translateY(-5px);
         }
         .subject {
-            font-size:1.4rem;
-            margin:0 0 1rem;
-            padding-bottom:0.8rem;
-            border-bottom:2px solid var(--accent-color);
+            font-size: 1.4rem;
+            margin: 0 0 1rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 2px solid var(--accent-color);
+            font-weight: 600;
         }
         ul {
-            margin:0;
-            padding:0;
-            display:grid;
-            gap:0.8rem;
+            margin: 0;
+            padding: 0;
+            display: grid;
+            gap: 0.8rem;
         }
         li {
-            padding:1rem;
-            background:var(--container-bg);
-            border-radius:8px;
-            border:1px solid var(--container-border);
+            padding: 1rem;
+            background: var(--container-bg);
+            border-radius: 12px;
+            border: 1px solid var(--container-border);
+            transition: all 0.2s ease;
+            list-style: none;
+        }
+        li:hover {
+            background: var(--accent-color);
+            color: white;
         }
         footer {
-            padding:1rem;
-            text-align:center;
-            border-top:1px solid var(--container-border);
+            padding: 1rem;
+            text-align: center;
+            border-top: 1px solid var(--container-border);
+            backdrop-filter: blur(8px);
         }
         .theme-toggle {
-            position:fixed;
-            bottom:1.5rem;
-            right:1.5rem;
-            padding:0.8rem 1.5rem;
-            border-radius:50px;
-            background:var(--container-bg);
-            border:1px solid var(--container-border);
-            cursor:pointer;
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            background: var(--container-bg);
+            border: 1px solid var(--container-border);
+            cursor: pointer;
+            backdrop-filter: blur(8px);
+            transition: all 0.3s ease;
+            font-family: 'MiSans', sans-serif;
         }
-        @media (max-width:768px) {
+        .theme-toggle:hover {
+            background: var(--accent-color);
+            color: white;
+        }
+        @media (max-width: 768px) {
             .container {
-                grid-template-columns:1fr;
-                padding:1rem;
+                grid-template-columns: 1fr;
+                padding: 1rem;
             }
             h1 {
-                font-size:1.8rem;
+                font-size: 1.8rem;
             }
         }
     </style>
 </head>
 <body>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3482600140804620"
-     crossorigin="anonymous"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3482600140804620" crossorigin="anonymous"></script>
     <header>
         <h1>4B作业网</h1>
+        <div class="update-time" id="update-time">最后更新：加载中...</div>
     </header>
     <div class="container">
         <section>
@@ -136,22 +174,31 @@
     </div>
     <footer>
         <p>Powered by GitHub Pages</p>
-        <p><a href="mailto:4b@4-b.xyz">4b@4-b.xyz</a></p>
+        <p><a href="mailto:4b@4-b.xyz" style="color: var(--accent-color); text-decoration: none;">4b@4-b.xyz</a></p>
     </footer>
     <button class="theme-toggle" id="theme-toggle">切换亮色模式</button>
     <script>
-        const t=document.getElementById('theme-toggle');
-        let s=localStorage.getItem('theme')||'dark';
-        const u=()=>{
-            document.documentElement.setAttribute('data-theme',s);
-            localStorage.setItem('theme',s);
-            t.textContent=s==='dark'?'切换亮色模式':'切换暗黑模式';
+        const themeToggle = document.getElementById('theme-toggle');
+        let currentTheme = localStorage.getItem('theme') || 'dark';
+        const updateTheme = () => {
+            document.documentElement.setAttribute('data-theme', currentTheme);
+            localStorage.setItem('theme', currentTheme);
+            themeToggle.textContent = currentTheme === 'dark' ? '切换亮色模式' : '切换暗黑模式';
         };
-        t.addEventListener('click',()=>{
-            s=s==='dark'?'light':'dark';
-            u()
+        themeToggle.addEventListener('click', () => {
+            currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            updateTheme();
         });
-        u();
+        updateTheme();
+        fetch('https://api.github.com/repos/mugunghwa-korea/4-b.xyz')
+            .then(response => response.json())
+            .then(data => {
+                const updateDate = new Date(data.pushed_at).toLocaleDateString('zh-CN');
+                document.getElementById('update-time').textContent = `最后更新：${updateDate}`;
+            })
+            .catch(() => {
+                document.getElementById('update-time').textContent = '最后更新：获取失败';
+            });
     </script>
 </body>
 </html>
