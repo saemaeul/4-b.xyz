@@ -43,11 +43,13 @@
             top: 0;
             border-bottom: 1px solid var(--container-border);
             box-shadow: var(--shadow);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         h1 {
             margin: 0;
             font-size: 2rem;
-            text-align: center;
             letter-spacing: 2px;
         }
         .update-time {
@@ -113,10 +115,7 @@
             backdrop-filter: blur(8px);
         }
         .theme-toggle {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            padding: 0.8rem 1.5rem;
+            padding: 0.6rem 1.2rem;
             border-radius: 50px;
             background: var(--container-bg);
             border: 1px solid var(--container-border);
@@ -124,8 +123,8 @@
             backdrop-filter: blur(8px);
             transition: all 0.3s ease;
             font-family: 'MiSans', sans-serif;
-            font-size: 1rem;
-            z-index: 1000;
+            font-size: 0.9rem;
+            color: var(--text-color);
         }
         .theme-toggle:hover {
             background: var(--accent-color);
@@ -139,36 +138,42 @@
             h1 {
                 font-size: 1.8rem;
             }
+            .theme-toggle {
+                padding: 0.5rem 1rem;
+                font-size: 0.8rem;
+            }
         }
     </style>
 </head>
 <body>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3482600140804620" crossorigin="anonymous"></script>
     <header>
         <h1>4B作业网</h1>
-        <div class="update-time" id="update-time">最后更新：加载中...</div>
+        <button class="theme-toggle" id="theme-toggle">切换亮色模式</button>
     </header>
+    <div class="update-time" id="update-time">最后更新：加载中...</div>
     <div class="container">
         <section>
             <h2 class="subject">语文</h2>
             <ul>
-                <li>补齐L3书本笔记</li>
-                <li>yxL4</li>
-                <li>TXP9.P10+L4(一,三)</li>
+                <li>TXL2(三)</li>
+                <li>TXL3(一,二)</li>
+                <li>yxL3</li>
+                <li>书写P13-14</li>
             </ul>
         </section>
         <section>
             <h2 class="subject">数学</h2>
             <ul>
-                <li>DP5</li>
-                <li>口P4</li>
+                <li>DP4</li>
             </ul>
         </section>
         <section>
             <h2 class="subject">英语</h2>
             <ul>
-                <li>Pre writing</li>
-                <li>V11(不交)</li>
+                <li>带原版书</li>
+                <li>听写C11-1/C11-2</li>
+                <li>Copy C11-2</li>
+                <li>Read P104</li>
             </ul>
         </section>
     </div>
@@ -176,7 +181,6 @@
         <p>Powered by GitHub Pages</p>
         <p><a href="mailto:4b@4-b.xyz" style="color: var(--accent-color); text-decoration: none;">4b@4-b.xyz</a></p>
     </footer>
-    <button class="theme-toggle" id="theme-toggle">切换亮色模式</button>
     <script>
         const themeToggle = document.getElementById('theme-toggle');
         let currentTheme = localStorage.getItem('theme') || 'dark';
