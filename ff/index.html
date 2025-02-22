@@ -5,28 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FLUFFY FLASH</title>
     <style>
+        @font-face {
+            font-family: 'CustomFont';
+            src: url('https://webstatic.mihoyo.com/common/clgm-static/sr/fonts/zh-cn.ttf') format('truetype');
+        }
         body {
-            font-family: 'Arial Rounded MT Bold', Arial, sans-serif;
+            font-family: 'CustomFont', Arial, sans-serif;
             background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
-            color: #fff;
+            color: #e0e0e0;
             min-height: 100vh;
             padding: 2rem;
             margin: 0;
         }
-
         .container {
             max-width: 800px;
             margin: 0 auto;
         }
-
         h1 {
             text-align: center;
             font-size: 2.5rem;
-            color: #ff7eb9;
+            color: #ff9eb8;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
             margin-bottom: 2rem;
         }
-
         .track {
             background: rgba(255, 255, 255, 0.1);
             border-radius: 15px;
@@ -35,26 +36,22 @@
             backdrop-filter: blur(10px);
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
-
         .track-title {
             font-size: 1.2rem;
             margin: 0 0 1rem 0;
-            color: #7afcff;
+            color: #a8e6ff;
         }
-
         audio {
             width: 100%;
             background: rgba(0,0,0,0.3);
             border-radius: 8px;
             padding: 5px;
         }
-
         audio::-webkit-media-controls-panel {
             background: rgba(0,0,0,0.3);
         }
-
         .remix {
-            color: #ff65a3;
+            color: #ff8f9e;
             font-weight: bold;
         }
     </style>
@@ -62,21 +59,18 @@
 <body>
     <div class="container">
         <h1>FLUFFY FLASH</h1>
-
         <div class="track">
             <p class="track-title">Original Version • Kobaryo</p>
             <audio controls>
                 <source src="https://music.163.com/song/media/outer/url?id=1949993859" type="audio/mpeg">
             </audio>
         </div>
-
         <div class="track">
             <p class="track-title">FLOWERING Version • <span class="remix">Kobaryo</span></p>
             <audio controls>
                 <source src="https://music.163.com/song/media/outer/url?id=2043164652" type="audio/mpeg">
             </audio>
         </div>
-
         <div class="track">
             <p class="track-title">C-Show & Maozon Remix • <span class="remix">C-Show / Maozon</span></p>
             <audio controls>
