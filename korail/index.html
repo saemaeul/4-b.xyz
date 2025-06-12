@@ -5,164 +5,183 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>한국 철도 승차 로그</title>
     <style>
-        :root {
-            --primary: #003791;
-            --secondary: #e60012;
-            --light-bg: #f8f9fa;
-            --text-dark: #333;
-            --text-light: #666;
-            --border: #e0e0e0;
-        }
-        
-        * {
-            box-sizing: border-box;
+        body {
+            font-family: 'Malgun Gothic', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
             margin: 0;
             padding: 0;
         }
-        
-        body {
-            font-family: 'Malgun Gothic', '맑은 고딕', sans-serif;
-            background-color: var(--light-bg);
-            color: var(--text-dark);
-            line-height: 1.6;
+
+        * {
+            box-sizing: border-box;
         }
-        
+
         .container {
             max-width: 800px;
             margin: 0 auto;
             padding: 20px;
         }
-        
+
         header {
-            background: var(--primary);
+            background: #003791;
             color: white;
             padding: 30px 0;
             text-align: center;
             margin-bottom: 30px;
         }
-        
+
         .header-title {
             font-size: 24px;
             font-weight: bold;
         }
-        
+
+        .summary {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .summary-row {
+            display: flex;
+            gap: 15px;
+        }
+
+        .summary-item {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            flex: 1;
+            border: 1px solid #e0e0e0;
+        }
+
+        .summary-value {
+            font-size: 20px;
+            font-weight: bold;
+            color: #003791;
+            margin-bottom: 5px;
+        }
+
+        .summary-label {
+            font-size: 12px;
+            color: #666;
+        }
+
         .record-list {
             display: flex;
             flex-direction: column;
             gap: 20px;
         }
-        
+
         .record-card {
             background: white;
             border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
             overflow: hidden;
-            border: 1px solid var(--border);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e0e0e0;
         }
-        
+
         .record-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 15px 20px;
             background: #f9f9f9;
-            border-bottom: 1px solid var(--border);
+            border-bottom: 1px solid #e0e0e0;
         }
-        
+
         .record-date {
             font-weight: bold;
-            color: var(--primary);
+            color: #003791;
         }
-        
+
         .train-class {
-            background-color: var(--secondary);
+            background-color: #e60012;
             color: white;
             padding: 4px 8px;
             border-radius: 4px;
             font-size: 12px;
             font-weight: bold;
         }
-        
+
         .record-content {
             padding: 20px;
         }
-        
+
         .route-info {
             display: flex;
             align-items: center;
             margin-bottom: 15px;
         }
-        
+
         .station-name {
             font-weight: bold;
             font-size: 18px;
         }
-        
+
         .departure {
-            color: var(--primary);
+            color: #003791;
         }
-        
+
         .arrival {
-            color: var(--secondary);
+            color: #e60012;
         }
-        
+
         .arrow {
             margin: 0 15px;
-            color: var(--text-light);
+            color: #666;
             font-size: 20px;
         }
-        
+
         .detail-items {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 10px;
         }
-        
+
         .detail-item {
             display: flex;
             align-items: center;
             font-size: 14px;
         }
-        
+
         .detail-icon {
             margin-right: 8px;
-            color: var(--primary);
-            width: 20px;
-            text-align: center;
+            color: #003791;
         }
-        
-        .summary {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-            margin-bottom: 30px;
+
+        .stats {
+            margin: 40px 0;
         }
-        
-        .summary-item {
-            background: white;
-            border-radius: 8px;
-            padding: 15px;
-            text-align: center;
-            border: 1px solid var(--border);
+
+        .stats h2 {
+            font-size: 16px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 5px;
         }
-        
-        .summary-value {
-            font-size: 20px;
-            font-weight: bold;
-            color: var(--primary);
-            margin-bottom: 5px;
+
+        .stats ul {
+            list-style: none;
         }
-        
-        .summary-label {
-            font-size: 12px;
-            color: var(--text-light);
+
+        .stats li {
+            font-size: 14px;
+            margin: 5px 0;
         }
-        
+
         @media (max-width: 600px) {
-            .summary {
-                grid-template-columns: repeat(2, 1fr);
+            .summary-row {
+                flex-direction: column;
             }
-            
+
+            .summary-item {
+                font-size: 16px;
+            }
+
             .detail-items {
                 grid-template-columns: 1fr;
             }
@@ -175,28 +194,47 @@
             <div class="header-title">한국 철도 승차 로그</div>
         </div>
     </header>
-    
+
     <div class="container">
         <div class="summary">
-            <div class="summary-item">
-                <div class="summary-value">4</div>
-                <div class="summary-label">총 운행 횟수</div>
+            <div class="summary-row">
+                <div class="summary-item">
+                    <div class="summary-value">4</div>
+                    <div class="summary-label">총 운행 횟수</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-value">4시간 5분</div>
+                    <div class="summary-label">총 운행 시간</div>
+                </div>
             </div>
-            <div class="summary-item">
-                <div class="summary-value">558.4</div>
-                <div class="summary-label">총 주행 거리(km)</div>
-            </div>
-            <div class="summary-item">
-                <div class="summary-value">6</div>
-                <div class="summary-label">경유 역수</div>
-            </div>
-            <div class="summary-item">
-                <div class="summary-value">3</div>
-                <div class="summary-label">열차 종별</div>
+            <div class="summary-row">
+                <div class="summary-item">
+                    <div class="summary-value">558.4</div>
+                    <div class="summary-label">총 주행 거리(km)</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-value">6</div>
+                    <div class="summary-label">경유 역수</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-value">3</div>
+                    <div class="summary-label">열차 종별</div>
+                </div>
             </div>
         </div>
-        
+
+        <div class="stats">
+            <h2>📊 통계 정보</h2>
+            <ul>
+                <li>🚆 가장 긴 여정: 부산 → 서울 (417.4km)</li>
+                <li>💰 가장 비싼 요금: 29,900원 (부산 → 서울)</li>
+                <li>🕘 가장 긴 소요 시간: 2시간 44분 (부산 → 서울)</li>
+                <li>🚄 가장 많이 이용한 열차 종류: KTX (2회)</li>
+            </ul>
+        </div>
+
         <div class="record-list">
+            <!-- 以下为你的旅程卡片列表，保持不变，略去注释 -->
             <!-- 4 -->
             <div class="record-card">
                 <div class="record-header">
@@ -210,29 +248,16 @@
                         <div class="station-name arrival">광주송정역</div>
                     </div>
                     <div class="detail-items">
-                        <div class="detail-item">
-                            <span class="detail-icon">🕘</span>
-                            <span>15:57 - 16:34 (37분)</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-icon">🚆</span>
-                            <span>ITX-마음 1164</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-icon">💺</span>
-                            <span>2호차 2C</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-icon">📏</span>
-                            <span>66.8km</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-icon">💰</span>
-                            <span>3,200원</span>
-                        </div>
+                        <div class="detail-item"><span class="detail-icon">🕘</span><span>15:57 - 16:34 (37분)</span></div>
+                        <div class="detail-item"><span class="detail-icon">🚆</span><span>ITX-마음 1164</span></div>
+                        <div class="detail-item"><span class="detail-icon">💺</span><span>2호차 2C</span></div>
+                        <div class="detail-item"><span class="detail-icon">📏</span><span>66.8km</span></div>
+                        <div class="detail-item"><span class="detail-icon">💰</span><span>3,200원</span></div>
                     </div>
                 </div>
             </div>
+
+            <!-- 其余三项（略） -->
             <!-- 3 -->
             <div class="record-card">
                 <div class="record-header">
@@ -246,29 +271,15 @@
                         <div class="station-name arrival">목포역</div>
                     </div>
                     <div class="detail-items">
-                        <div class="detail-item">
-                            <span class="detail-icon">🕘</span>
-                            <span>10:15 - 10:51 (36분)</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-icon">🚆</span>
-                            <span>KTX 409</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-icon">💺</span>
-                            <span>6호차 11B</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-icon">📏</span>
-                            <span>66.8km</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-icon">💰</span>
-                            <span>4,200원</span>
-                        </div>
+                        <div class="detail-item"><span class="detail-icon">🕘</span><span>10:15 - 10:51 (36분)</span></div>
+                        <div class="detail-item"><span class="detail-icon">🚆</span><span>KTX 409</span></div>
+                        <div class="detail-item"><span class="detail-icon">💺</span><span>6호차 11B</span></div>
+                        <div class="detail-item"><span class="detail-icon">📏</span><span>66.8km</span></div>
+                        <div class="detail-item"><span class="detail-icon">💰</span><span>4,200원</span></div>
                     </div>
                 </div>
             </div>
+
             <!-- 2 -->
             <div class="record-card">
                 <div class="record-header">
@@ -282,29 +293,15 @@
                         <div class="station-name arrival">극락강역</div>
                     </div>
                     <div class="detail-items">
-                        <div class="detail-item">
-                            <span class="detail-icon">🕘</span>
-                            <span>21:20 - 21:28 (8분)</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-icon">🚆</span>
-                            <span>무궁화호 1466</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-icon">💺</span>
-                            <span>2호차 66</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-icon">📏</span>
-                            <span>7.4km</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-icon">💰</span>
-                            <span>1,300원</span>
-                        </div>
+                        <div class="detail-item"><span class="detail-icon">🕘</span><span>21:20 - 21:28 (8분)</span></div>
+                        <div class="detail-item"><span class="detail-icon">🚆</span><span>무궁화호 1466</span></div>
+                        <div class="detail-item"><span class="detail-icon">💺</span><span>2호차 66</span></div>
+                        <div class="detail-item"><span class="detail-icon">📏</span><span>7.4km</span></div>
+                        <div class="detail-item"><span class="detail-icon">💰</span><span>1,300원</span></div>
                     </div>
                 </div>
             </div>
+
             <!-- 1 -->
             <div class="record-card">
                 <div class="record-header">
@@ -318,29 +315,15 @@
                         <div class="station-name arrival">서울역</div>
                     </div>
                     <div class="detail-items">
-                        <div class="detail-item">
-                            <span class="detail-icon">🕘</span>
-                            <span>21:00 - 23:44 (2시간 44분)</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-icon">🚆</span>
-                            <span>KTX 066</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-icon">💺</span>
-                            <span>6호차 10B</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-icon">📏</span>
-                            <span>417.4km</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-icon">💰</span>
-                            <span>29,900원</span>
-                        </div>
+                        <div class="detail-item"><span class="detail-icon">🕘</span><span>21:00 - 23:44 (2시간 44분)</span></div>
+                        <div class="detail-item"><span class="detail-icon">🚆</span><span>KTX 066</span></div>
+                        <div class="detail-item"><span class="detail-icon">💺</span><span>6호차 10B</span></div>
+                        <div class="detail-item"><span class="detail-icon">📏</span><span>417.4km</span></div>
+                        <div class="detail-item"><span class="detail-icon">💰</span><span>29,900원</span></div>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </body>
