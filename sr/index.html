@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stardust:RAY</title>
+    <style>
+        @font-face {
+            font-family: 'CustomFont';
+            src: url('https://webstatic.mihoyo.com/common/clgm-static/sr/fonts/zh-cn.ttf') format('truetype');
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'CustomFont', Arial, sans-serif;
+            background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+            color: #e0e0e0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+        
+        .container {
+            max-width: 500px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .track {
+            text-align: center;
+        }
+        
+        .album-art {
+            width: 250px;
+            height: 250px;
+            margin: 0 auto 1.5rem;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            background: linear-gradient(135deg, #3a3a3a, #5a5a5a);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .album-art img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .track-info {
+            margin-bottom: 1.5rem;
+        }
+        
+        .track-title {
+            font-size: 1.8rem;
+            color: #a8e6ff;
+            margin-bottom: 0.5rem;
+        }
+        
+        .track-artist {
+            font-size: 1.1rem;
+            color: #b19cd9;
+        }
+        
+        .audio-player {
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+        
+        audio {
+            width: 100%;
+            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.3);
+        }
+        
+        audio::-webkit-media-controls-panel {
+            background: rgba(0, 0, 0, 0.3);
+        }
+        
+        .track-controls {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .track-controls button {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            color: #e0e0e0;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            font-family: 'CustomFont', Arial, sans-serif;
+            font-size: 0.9rem;
+        }
+        
+        .track-controls button:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        @media (max-width: 600px) {
+            body {
+                padding: 1rem;
+            }
+            
+            .container {
+                padding: 1.5rem;
+            }
+            
+            .album-art {
+                width: 200px;
+                height: 200px;
+            }
+            
+            .track-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="track">
+            <div class="album-art">
+                <img src="https://img.moegirl.org.cn/common/7/76/ONGEKIsong_stardustray.png" alt="Stardust:RAY 封面">
+            </div>
+            
+            <div class="track-info">
+                <div class="track-title">Stardust:RAY</div>
+                <div class="track-artist">kanone vs. BlackY</div>
+            </div>
+            
+            <div class="audio-player">
+                <audio controls>
+                    <source src="https://music.163.com/song/media/outer/url?id=2134539910" type="audio/mpeg">
+                    您的浏览器不支持音频播放。
+                </audio>
+            </div>
+            
+            <div class="track-controls">
+                <button onclick="downloadTrack()">下载</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function downloadTrack() {
+            window.open('https://music.163.com/song/media/outer/url?id=2134539910', '_blank');
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const audio = document.querySelector('audio');
+            const albumArt = document.querySelector('.album-art');
+            
+            audio.addEventListener('play', function() {
+                albumArt.style.transform = 'scale(1.05)';
+                albumArt.style.transition = 'transform 0.5s ease';
+            });
+            
+            audio.addEventListener('pause', function() {
+                albumArt.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
