@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>4B作业网</title>
+    <title>网页标题</title>
     <style>
         @font-face {
             font-family: 'MiSans';
@@ -147,7 +147,7 @@
 </head>
 <body>
     <header>
-        <h1>4B作业网</h1>
+        <h1>大标题</h1>
         <button class="theme-toggle" id="theme-toggle">切换亮色模式</button>
     </header>
     <div class="update-time" id="update-time">最后更新：加载中...</div>
@@ -187,7 +187,7 @@
             updateTheme();
         });
         updateTheme();
-        fetch('https://api.github.com/repos/saemaeul/4-b.xyz')
+        fetch('https://api.github.com/repos/saemaeul/saemaeul.github.io')
             .then(response => response.json())
             .then(data => {
                 const updateDate = new Date(data.pushed_at).toLocaleDateString('zh-CN');
