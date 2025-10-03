@@ -46,12 +46,6 @@
             margin-bottom: 8px;
         }
         
-        .current-time {
-            margin-top: 10px;
-            font-size: 14px;
-            color: rgba(255, 255, 255, 0.7);
-        }
-        
         .speed-display {
             background: #1e1e1e;
             border-radius: 20px;
@@ -169,7 +163,6 @@
     <div class="container">
         <div class="header">
             <h1>GPS速度计</h1>
-            <div class="current-time" id="currentTime"></div>
         </div>
         
         <div class="speed-display">
@@ -215,20 +208,9 @@
         const startBtn = document.getElementById('startBtn');
         const stopBtn = document.getElementById('stopBtn');
         const status = document.getElementById('status');
-        const currentTime = document.getElementById('currentTime');
         
         let watchId = null;
         let lastPosition = null;
-        let timeInterval = null;
-        
-        function updateCurrentTime() {
-            const now = new Date();
-            const timeString = now.toLocaleTimeString('zh-CN');
-            currentTime.textContent = timeString;
-        }
-        
-        updateCurrentTime();
-        timeInterval = setInterval(updateCurrentTime, 1000);
         
         function updateSpeedometer(speed) {
             const speedKmh = speed * 3.6;
@@ -310,7 +292,7 @@
                     const speed = calculateSpeed(position);
                     updateSpeedometer(speed);
                     
-                    status.textContent = "GPS测速中... " + new Date().toLocaleTimeString();
+                    status.textContent = "GPS测速中";
                 },
                 function(error) {
                     let errorMsg;
