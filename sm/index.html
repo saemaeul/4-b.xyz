@@ -5,11 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GPS速度计</title>
     <style>
+        @font-face {
+            font-family: 'CustomFont';
+            src: url('https://webstatic.mihoyo.com/common/clgm-static/sr/fonts/zh-cn.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            font-family: 'CustomFont', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
         }
         
         body {
@@ -42,6 +49,12 @@
         .subtitle {
             color: rgba(255, 255, 255, 0.6);
             font-size: 14px;
+        }
+        
+        .current-time {
+            margin-top: 10px;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
         }
         
         .speed-display {
@@ -162,6 +175,7 @@
         <div class="header">
             <h1>GPS速度计</h1>
             <div class="subtitle">实时速度测量</div>
+            <div class="current-time" id="currentTime"></div>
         </div>
         
         <div class="speed-display">
@@ -207,9 +221,20 @@
         const startBtn = document.getElementById('startBtn');
         const stopBtn = document.getElementById('stopBtn');
         const status = document.getElementById('status');
+        const currentTime = document.getElementById('currentTime');
         
         let watchId = null;
         let lastPosition = null;
+        let timeInterval = null;
+        
+        function updateCurrentTime() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('zh-CN');
+            currentTime.textContent = timeString;
+        }
+        
+        updateCurrentTime();
+        timeInterval = setInterval(updateCurrentTime, 1000);
         
         function updateSpeedometer(speed) {
             const speedKmh = speed * 3.6;
@@ -225,8 +250,13 @@
         }
         
         function updatePositionInfo(position) {
-            longitude.textContent = position.coords.longitude.toFixed(6);
-            latitude.textContent = position.coords.latitude.toFixed(6);
+            const lon = position.coords.longitude;
+            const lonDirection = lon >= 0 ? 'E' : 'W';
+            longitude.textContent = `${Math.abs(lon).toFixed(6)}°${lonDirection}`;
+            
+            const lat = position.coords.latitude;
+            const latDirection = lat >= 0 ? 'N' : 'S';
+            latitude.textContent = `${Math.abs(lat).toFixed(6)}°${latDirection}`;
             
             if (position.coords.altitude) {
                 altitude.textContent = position.coords.altitude.toFixed(1) + ' 米';
